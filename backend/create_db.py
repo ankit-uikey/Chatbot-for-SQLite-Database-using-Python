@@ -21,7 +21,8 @@ INSERT INTO Employees (ID, Name, Department, Salary, Hire_Date) VALUES (?, ?, ?,
 """, [
     (1, "Alice", "Sales", 50000, "2021-01-15"),
     (2, "Bob", "Engineering", 70000, "2020-06-10"),
-    (3, "Charlie", "Marketing", 60000, "2022-03-20")
+    (3, "Charlie", "Marketing", 60000, "2022-03-20"),
+    (4, "Ankit", "Engineering", 90000, "2025-02-10")
 ])
 
 # Create Departments table
@@ -39,7 +40,8 @@ INSERT INTO Departments (ID, Name, Manager) VALUES (?, ?, ?)
 """, [
     (1, "Sales", "Alice"),
     (2, "Engineering", "Bob"),
-    (3, "Marketing", "Charlie")
+    (3, "Marketing", "Charlie"),
+    (4, "Engineering", "Ankit")
 ])
 
 # Commit changes and close connection
