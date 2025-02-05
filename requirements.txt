@@ -1,4 +1,5 @@
 streamlit
 flask
+nltk
 requests
 aiobotocore==2.5.0
