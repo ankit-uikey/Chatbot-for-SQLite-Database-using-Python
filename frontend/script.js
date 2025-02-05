@@ -66,10 +66,10 @@ function fetchBotResponse(message) {
     })
     .then(response => response.json())
     .then(data => {
-        appendMessage("ChatGPT", data.response);
-        currentConversation.push({ sender: 'ChatGPT', text: data.response });
+        appendMessage("BOT", data.response);
+        currentConversation.push({ sender: 'BOT', text: data.response });
     })
-    .catch(() => appendMessage("ChatGPT", "Error fetching response."));
+    .catch(() => appendMessage("BOT", "Error fetching response."));
 }
 
 function updateConversationList() {
