@@ -64,7 +64,7 @@ def generate_sql_query(user_input):
 
 # Set database path inside backend folder
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of current file
-DB_PATH = os.path.join(BASE_DIR, "backend", "company.db")  # Ensure it uses the backend folder
+DB_PATH = os.path.join(BASE_DIR, "company.db")  # Ensure it uses the backend folder
 
 
 def execute_query(query):
