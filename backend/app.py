@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify, send_from_directory
 from chatbot import process_query
 from flask_cors import CORS
+#from threading import Thread
+from waitress import serve
 import os
 
 app = Flask(__name__, static_folder="../frontend")
