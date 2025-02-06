@@ -4,3 +4,4 @@ nltk
 flask_cors
 requests
 aiobotocore==2.5.0
+waitress
