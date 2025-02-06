@@ -23,6 +23,6 @@ def chat():
     user_input = data.get("message", "")
     response = process_query(user_input)
     return jsonify({"response": response})
-
+    
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
