@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, send_from_directory
 from chatbot import process_query
 from flask_cors import CORS
 #from threading import Thread
-from waitress import serve
+#from waitress import serve
 import os
 
 app = Flask(__name__, static_folder="../frontend")
@@ -29,8 +29,5 @@ def chat():
 #def run_flask():
 #    app.run(host="0.0.0.0", port=0)
 
-#if __name__ == "__main__":
-#    Thread(target=run_flask).start()
-
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=0)
+    app.run(debug=True)
