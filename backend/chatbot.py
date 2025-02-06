@@ -4,6 +4,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import string
+import os
 
 # Download NLTK resources if not available
 nltk.download("punkt")
@@ -62,13 +63,13 @@ def generate_sql_query(user_input):
     return None  # No valid query pattern matched
 
 # Set database path inside backend folder
-#BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of current file
-#DB_PATH = os.path.join(BASE_DIR, "backend", "company.db")  # Ensure it uses the backend folder
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of current file
+DB_PATH = os.path.join(BASE_DIR, "backend", "company.db")  # Ensure it uses the backend folder
 
 
 def execute_query(query):
     """Executes the SQL query on the SQLite database."""
-    conn = sqlite3.connect("backend/company.db") # use DB_PATH if got error
+    conn = sqlite3.connect(DB_PATH, uri=True) # use DB_PATH if got error
     cursor = conn.cursor()
     
     try:

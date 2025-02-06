@@ -3,9 +3,22 @@ from pydantic import BaseModel
 from backend.chatbot import process_query
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 import os
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Change to your frontend domain in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+print("Current Working Directory:", os.getcwd())  
+print("Database Exists:", os.path.exists("backend/company.db")) # Check if the database exists
 
 # Get absolute path of frontend directory
 frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../frontend"))
