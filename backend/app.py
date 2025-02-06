@@ -1,30 +1,37 @@
-from flask import Flask, request, jsonify, send_from_directory
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 from chatbot import process_query
-from flask_cors import CORS
-#from threading import Thread
-from waitress import serve
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 import os
 
-app = Flask(__name__, static_folder="../frontend")
-CORS(app)  # Enable cross-origin requests
+app = FastAPI()
 
-# Serve the index.html file
-@app.route("/")
-def home():
-    return send_from_directory(app.static_folder, "index.html")
+# Get absolute path of frontend directory
+frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../frontend"))
 
-# Serve static files (CSS, JS)
-@app.route("/<path:path>")
-def static_files(path):
-    return send_from_directory(app.static_folder, path)
+# Check if the frontend folder exists
+if not os.path.exists(frontend_path):
+    raise RuntimeError(f"Frontend directory '{frontend_path}' does not exist")
 
-# This route handles chat messages sent via POST requests
-@app.route("/chat", methods=["POST"])
-def chat():
-    data = request.json
-    user_input = data.get("message", "")
-    response = process_query(user_input)
-    return jsonify({"response": response})
+# Mount the frontend folder to serve static files
+app.mount("/static", StaticFiles(directory=frontend_path), name="static")
+
+# Serve index.html when accessing "/"
+@app.get("/")
+async def serve_index():
+    return FileResponse(os.path.join(frontend_path, "index.html"))
+
+# Define request model
+class ChatRequest(BaseModel):
+    message: str
     
+@app.post("/chat")
+def chat(request: ChatRequest):
+    response = process_query(request.message)
+    return {"response": response}
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
