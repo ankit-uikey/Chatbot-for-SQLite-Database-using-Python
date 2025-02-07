@@ -1,4 +1,4 @@
-import sqlite3
+import pymysql
 import re
 import nltk
 from nltk.tokenize import word_tokenize
@@ -63,13 +63,26 @@ def generate_sql_query(user_input):
     return None  # No valid query pattern matched
 
 # Set database path inside backend folder
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of current file
-DB_PATH = os.path.join(BASE_DIR, "company.db")  # Ensure it uses the backend folder
-print(DB_PATH)
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of current file
+#DB_PATH = os.path.join(BASE_DIR, "company.db")  # Ensure it uses the backend folder
+#print(DB_PATH)
 
 def execute_query(query):
-    """Executes the SQL query on the SQLite database."""
-    conn = sqlite3.connect(DB_PATH, uri=True) # use DB_PATH if got error
+    """Executes the SQL query on the MySQL Server database."""
+    timeout = 10
+    conn = pymysql.connect(
+        charset="utf8mb4",
+        connect_timeout=timeout,
+        cursorclass=pymysql.cursors.DictCursor,
+        db="defaultdb",
+        host="mysql-database-chatbot-for-database-using-python.k.aivencloud.com",
+        password="AVNS_KiPRSvvJM8j5gmXI0Y0",
+        read_timeout=timeout,
+        port=20052,
+        user="avnadmin",
+        write_timeout=timeout,
+    )
+    #conn = sqlite3.connect(DB_PATH, uri=True) # use DB_PATH if got error
     cursor = conn.cursor()
     
     try:
@@ -88,7 +101,7 @@ def execute_query(query):
         else:
             return "\n".join(str(row) for row in results)
     
-    except sqlite3.Error as e:
+    except pymysql.Error as e:
         conn.close()
         return f"Database error: {e}"
 
