@@ -3,6 +3,7 @@ import re
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+from dotenv import load_dotenv
 import string
 import os
 
@@ -67,6 +68,7 @@ def generate_sql_query(user_input):
 #DB_PATH = os.path.join(BASE_DIR, "company.db")  # Ensure it uses the backend folder
 #print(DB_PATH)
 
+load_dotenv()
 def execute_query(query):
     """Executes the SQL query on the MySQL Server database."""
     timeout = 10
@@ -76,7 +78,7 @@ def execute_query(query):
         cursorclass=pymysql.cursors.DictCursor,
         db="defaultdb",
         host="mysql-database-chatbot-for-database-using-python.k.aivencloud.com",
-        password="AVNS_KiPRSvvJM8j5gmXI0Y0",
+        password=os.getenv("DB_PASSWORD"),
         read_timeout=timeout,
         port=20052,
         user="avnadmin",

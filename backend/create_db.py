@@ -1,10 +1,11 @@
-# import sqlite3
+from dotenv import load_dotenv
 import pymysql
 
 # Connect to SQLite database (or create it if it doesn't exist)
 #conn = sqlite3.connect("company.db")
 #cursor = conn.cursor()
 
+load_dotenv()
 timeout = 10
 conn = pymysql.connect(
   charset="utf8mb4",
@@ -12,7 +13,7 @@ conn = pymysql.connect(
   cursorclass=pymysql.cursors.DictCursor,
   db="defaultdb",
   host="mysql-database-chatbot-for-database-using-python.k.aivencloud.com",
-  password="AVNS_KiPRSvvJM8j5gmXI0Y0",
+  password=os.getenv("DB_PASSWORD"),
   read_timeout=timeout,
   port=20052,
   user="avnadmin",
