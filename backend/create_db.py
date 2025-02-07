@@ -1,11 +1,9 @@
-from dotenv import load_dotenv
 import pymysql
-
+import os
 # Connect to SQLite database (or create it if it doesn't exist)
 #conn = sqlite3.connect("company.db")
 #cursor = conn.cursor()
 
-load_dotenv()
 timeout = 10
 conn = pymysql.connect(
   charset="utf8mb4",

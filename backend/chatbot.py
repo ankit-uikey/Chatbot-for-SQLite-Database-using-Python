@@ -3,7 +3,6 @@ import re
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-from dotenv import load_dotenv
 import string
 import os
 
@@ -68,7 +67,6 @@ def generate_sql_query(user_input):
 #DB_PATH = os.path.join(BASE_DIR, "company.db")  # Ensure it uses the backend folder
 #print(DB_PATH)
 
-load_dotenv()
 def execute_query(query):
     """Executes the SQL query on the MySQL Server database."""
     timeout = 10
