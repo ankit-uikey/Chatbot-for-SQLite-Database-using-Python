@@ -17,8 +17,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-print("Current Working Directory:", os.getcwd())  
-print("Database Exists:", os.path.exists("backend/company.db")) # Check if the database exists
+#print("Current Working Directory:", os.getcwd())  
+#print("Database Exists:", os.path.exists("backend/company.db")) # Check if the database exists
 
 # Get absolute path of frontend directory
 frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../frontend"))

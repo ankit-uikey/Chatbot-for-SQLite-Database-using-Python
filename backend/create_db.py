@@ -6,20 +6,21 @@ import os
 
 timeout = 10
 conn = pymysql.connect(
-  charset="utf8mb4",
-  connect_timeout=timeout,
-  cursorclass=pymysql.cursors.DictCursor,
-  db="defaultdb",
-  host="mysql-database-chatbot-for-database-using-python.k.aivencloud.com",
-  password=os.getenv("DB_PASSWORD"),
-  read_timeout=timeout,
-  port=20052,
-  user="avnadmin",
-  write_timeout=timeout,
+    charset="utf8mb4",
+    connect_timeout=timeout,
+    cursorclass=pymysql.cursors.DictCursor,
+    db=os.getenv("DB_NAME"),
+    host=os.getenv("DB_HOST"),
+    password=os.getenv("DB_PASSWORD"),
+    read_timeout=timeout,
+    port=20052,
+    user=os.getenv("DB_USER"),
+    write_timeout=timeout
 )
 
 try:
     cursor = conn.cursor()
+    print(f"\n Connection to MySQL DB successful! \n")
 
     # Create Employees table
     cursor.execute("""

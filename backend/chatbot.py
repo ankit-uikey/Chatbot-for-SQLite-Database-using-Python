@@ -74,17 +74,17 @@ def execute_query(query):
         charset="utf8mb4",
         connect_timeout=timeout,
         cursorclass=pymysql.cursors.DictCursor,
-        db="defaultdb",
-        host="mysql-database-chatbot-for-database-using-python.k.aivencloud.com",
+        db=os.getenv("DB_NAME"),
+        host=os.getenv("DB_HOST"),
         password=os.getenv("DB_PASSWORD"),
         read_timeout=timeout,
         port=20052,
-        user="avnadmin",
-        write_timeout=timeout,
+        user=os.getenv("DB_USER"),
+        write_timeout=timeout
     )
     #conn = sqlite3.connect(DB_PATH, uri=True) # use DB_PATH if got error
     cursor = conn.cursor()
-    
+    print(f"\n Connection to MySQL DB successful! \n")
     try:
         cursor.execute(query)
         results = cursor.fetchall()
