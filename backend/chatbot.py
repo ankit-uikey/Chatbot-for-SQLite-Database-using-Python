@@ -20,7 +20,7 @@ try:
             user=os.getenv("DB_USER"),
             write_timeout=timeout,
         )
-        print("Connected to Database Successfully!")
+        print("Connection to Database Successfully!")
 except Exception as e:
         print("Database Connection Failed:", str(e))
 # ---------------------------------------- Test ----------------------------------------
@@ -122,6 +122,7 @@ def execute_query(query):
     
     except pymysql.Error as e:
         conn.close()
+        print(f"Database error: {e}")
         return f"Database error: {e}"
 
 def process_query(user_input):

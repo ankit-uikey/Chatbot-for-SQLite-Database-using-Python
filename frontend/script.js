@@ -64,13 +64,27 @@ function fetchBotResponse(message) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
     })
-    .then(response => response.json())
-    .then(data => {
-        appendMessage("BOT", data.response);
-        currentConversation.push({ sender: 'BOT', text: data.response });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
     })
-    .catch(() => appendMessage("BOT", "Error fetching response."));
+    .then(data => {
+        console.log("API Response:", data); // Debugging: Check what API returns
+        if (data.response) {
+            appendMessage("BOT", data.response);
+            currentConversation.push({ sender: 'BOT', text: data.response });
+        } else {
+            appendMessage("BOT", "⚠️ Unexpected response format.");
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching response:", error);
+        appendMessage("BOT", "❌ Error fetching response. Please try again.");
+    });
 }
+
 
 function updateConversationList() {
     conversationList.innerHTML = "";
