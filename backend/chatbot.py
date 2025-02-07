@@ -87,18 +87,18 @@ def generate_sql_query(user_input):
 
 def execute_query(query):
     """Executes the SQL query on the MySQL Server database."""
-    timeout = 10
+    #timeout = 2 # Set timeout to 2 seconds
     conn = pymysql.connect(
             charset="utf8mb4",
-            connect_timeout=timeout,
+            connect_timeout= 5, #Set timeout to 5 seconds
             cursorclass=pymysql.cursors.DictCursor,
             db=os.getenv("DB_NAME"),
             host=os.getenv("DB_HOST"),
             password=os.getenv("DB_PASSWORD"),
-            read_timeout=timeout,
+            read_timeout=2, # Set timeout to 2 seconds
             port=20052,
             user=os.getenv("DB_USER"),
-            write_timeout=timeout,
+            write_timeout= 5, # Set timeout to 5 seconds
         )
     
     #conn = sqlite3.connect(DB_PATH, uri=True) # use DB_PATH if got error
