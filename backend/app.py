@@ -6,6 +6,11 @@ from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
+print("DB_HOST:", os.getenv("DB_HOST"))  
+print("DB_NAME:", os.getenv("DB_NAME"))  
+print("DB_USER:", os.getenv("DB_USER"))  
+print("DB_PASSWORD:", os.getenv("DB_PASSWORD"))  # Remove after testing
+
 app = FastAPI()
 
 # Add CORS middleware
