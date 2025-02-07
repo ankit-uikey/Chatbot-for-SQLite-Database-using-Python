@@ -82,6 +82,7 @@ def execute_query(query):
         user=os.getenv("DB_USER"),
         write_timeout=timeout
     )
+    
     #conn = sqlite3.connect(DB_PATH, uri=True) # use DB_PATH if got error
     cursor = conn.cursor()
     print(f"\n Connection to MySQL DB successful! \n")
