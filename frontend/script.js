@@ -87,20 +87,30 @@ function appendMessage(sender, message) {
 
 function fetchBotResponse(message) {
     fetch("https://striped-selia-ankituikey-f30b92bb.koyeb.app/chat", { 
-        method: "POST",  // Ensure it's a POST request
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: "show all employees" }) // Wrap message in an object
+        body: JSON.stringify({ message: message })  // Dynamically send user message
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
-        appendMessage("BOT", data.response);
-        currentConversation.push({ sender: 'BOT', text: data.response });
+        if (data && data.response) {
+            appendMessage("BOT", data.response);
+            currentConversation.push({ sender: 'BOT', text: data.response });
+        } else {
+            appendMessage("BOT", "Unexpected response format.");
+        }
     })
     .catch(error => {
-        console.error("Error fetching response:", error);
-        appendMessage("BOT", "Error fetching response.");
+        console.error("Error fetching Data & Response:", error);
+        appendMessage("BOT", "Error fetching response. Please try again.");
     });
 }
+
 
 function updateConversationList() {
     conversationList.innerHTML = "";
