@@ -80,7 +80,7 @@ function fetchBotResponse(message) {
         }
     })
     .catch(error => {
-        console.error("Error fetching response:", error);
+        console.error("Error fetching Data & Response:", error);
         appendMessage("BOT", "❌ Error fetching response. Please try again.");
     });
 }
