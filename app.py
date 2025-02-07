@@ -48,6 +48,10 @@ def chat(request: ChatRequest):
     response = process_query(request.message)
     return {"response": response}
 
+@app.get("/chat")
+def debug_chat():
+    return {"message": "Use POST instead of GET!"}
+
 
 if __name__ == "__main__":
     import uvicorn
