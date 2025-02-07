@@ -89,7 +89,7 @@ function fetchBotResponse(message) {
     fetch("https://striped-selia-ankituikey-f30b92bb.koyeb.app/chat", { 
         method: "POST",  // Ensure it's a POST request
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: message }) // Wrap message in an object
+        body: JSON.stringify({ message: "show all employees" }) // Wrap message in an object
     })
     .then(response => response.json())
     .then(data => {
