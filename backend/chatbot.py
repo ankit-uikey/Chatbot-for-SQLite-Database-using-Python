@@ -76,7 +76,7 @@ def execute_query(query):
         cursorclass=pymysql.cursors.DictCursor,
         db=os.getenv("DB_NAME"),
         host=os.getenv("DB_HOST"),
-        password=os.getenv("DB_PASSWORD"),
+        #password=os.getenv("DB_PASSWORD"),
         read_timeout=timeout,
         port=20052,
         user=os.getenv("DB_USER"),
