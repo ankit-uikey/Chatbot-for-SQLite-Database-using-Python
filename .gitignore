@@ -1,0 +1,3 @@
+# Ignore database connection files
+backend/chatbot.py
+backend/create_db.py

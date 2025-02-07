@@ -15,7 +15,7 @@ conn = pymysql.connect(
     read_timeout=timeout,
     port=20052,
     user=os.getenv("DB_USER"),
-    write_timeout=timeout
+    write_timeout=timeout,
 )
 
 try:
