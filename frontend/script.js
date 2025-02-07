@@ -87,9 +87,9 @@ function appendMessage(sender, message) {
 
 function fetchBotResponse(message) {
     fetch("https://striped-selia-ankituikey-f30b92bb.koyeb.app/chat", { 
-        method: "POST",
+        method: "POST",  // Ensure it's a POST request
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: message }) // Ensure message is wrapped in an object
+        body: JSON.stringify({ message: message }) // Wrap message in an object
     })
     .then(response => response.json())
     .then(data => {
@@ -97,11 +97,10 @@ function fetchBotResponse(message) {
         currentConversation.push({ sender: 'BOT', text: data.response });
     })
     .catch(error => {
-        console.error("Error:", error);
+        console.error("Error fetching response:", error);
         appendMessage("BOT", "Error fetching response.");
     });
 }
-
 
 function updateConversationList() {
     conversationList.innerHTML = "";
