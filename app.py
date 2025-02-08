@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from pydantic import BaseModel
 from chatbot import process_query
 from fastapi.staticfiles import StaticFiles
@@ -6,16 +6,12 @@ from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
-print("DB_HOST:", os.getenv("DB_HOST"))  
-print("DB_NAME:", os.getenv("DB_NAME"))  
-print("DB_USER:", os.getenv("DB_USER"))  # Remove after testing
-
 app = FastAPI()
 
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change to your frontend domain in production
+    allow_origins=["https://striped-selia-ankituikey-f30b92bb.koyeb.app/"],  # Change to your frontend domain in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -48,9 +44,9 @@ def chat(request: ChatRequest):
     response = process_query(request.message)
     return {"response": response}
 
-# @app.get("/chat")
-# def debug_chat():
-#     return {"message": "Use POST instead of GET!"}
+@app.get("/chat")
+def debug_chat():
+    return {"message": "Use POST instead of GET!"}
 
 
 if __name__ == "__main__":

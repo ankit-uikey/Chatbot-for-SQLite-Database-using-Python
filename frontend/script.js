@@ -86,7 +86,6 @@ function appendMessage(sender, message) {
 // }
 
 function fetchBotResponse(message) {
-    print(f"\nFetching Bot Response\n");
     fetch("https://striped-selia-ankituikey-f30b92bb.koyeb.app/chat", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
