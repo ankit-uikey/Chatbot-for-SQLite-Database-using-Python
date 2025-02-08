@@ -5,25 +5,6 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import string
 import os
-# ---------------------------------------- Test ----------------------------------------
-try:
-        timeout = 10
-        conn = pymysql.connect(
-            charset="utf8mb4",
-            connect_timeout=timeout,
-            cursorclass=pymysql.cursors.DictCursor,
-            db=os.getenv("DB_NAME"),
-            host=os.getenv("DB_HOST"),
-            password=os.getenv("DB_PASSWORD"),
-            read_timeout=timeout,
-            port=20052,
-            user=os.getenv("DB_USER"),
-            write_timeout=timeout,
-        )
-        print("Connection to Database Successfully!")
-except Exception as e:
-        print("Database Connection Failed:", str(e))
-# ---------------------------------------- Test ----------------------------------------
 
 # Download NLTK resources if not available
 nltk.download("punkt")
@@ -81,11 +62,6 @@ def generate_sql_query(user_input):
 
     return None  # No valid query pattern matched
 
-# Set database path inside backend folder
-#BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of current file
-#DB_PATH = os.path.join(BASE_DIR, "company.db")  # Ensure it uses the backend folder
-#print(DB_PATH)
-
 def execute_query(query):
     """Executes the SQL query on the MySQL Server database."""
     #timeout = 2 # Set timeout to 2 seconds
@@ -102,7 +78,6 @@ def execute_query(query):
             write_timeout= 5, # Set timeout to 5 seconds
         )
     
-    #conn = sqlite3.connect(DB_PATH, uri=True) # use DB_PATH if got error
     cursor = conn.cursor()
     print(f"\n Connection to MySQL DB successful! \n")
     try:
@@ -123,7 +98,6 @@ def execute_query(query):
     
     except pymysql.Error as e:
         conn.close()
-        print(f"Database error: {e}")
         return f"Database error: {e}"
 
 def process_query(user_input):

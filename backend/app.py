@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from chatbot import process_query
+from backend.chatbot import process_query
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,9 +16,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-#print("Current Working Directory:", os.getcwd())  
-#print("Database Exists:", os.path.exists("backend/company.db")) # Check if the database exists
 
 # Get absolute path of frontend directory
 frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "/workspace/frontend"))
@@ -39,15 +36,16 @@ async def serve_index():
 class ChatRequest(BaseModel):
     message: str
 
+# Define API route
 @app.post("/chat")
 def chat(request: ChatRequest):
     response = process_query(request.message)
     return {"response": response}
 
-@app.get("/chat")
-def debug_chat():
-    return {"message": "Use POST instead of GET!"}
-
+# Define debug route
+#@app.get("/chat")
+#def debug_chat():
+#    return {"message": "Use POST instead of GET!"}
 
 if __name__ == "__main__":
     import uvicorn

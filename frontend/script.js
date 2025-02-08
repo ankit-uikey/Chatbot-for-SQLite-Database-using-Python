@@ -58,33 +58,6 @@ function appendMessage(sender, message) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// function fetchBotResponse(message) {
-//     fetch("https://striped-selia-ankituikey-f30b92bb.koyeb.app/chat", { 
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ message: message }),
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! Status: ${response.status}`);
-//         }
-//         return response.json();
-//     })
-//     .then(data => {
-//         console.log("API Response:", data); // Debugging: Check what API returns
-//         if (data.response) {
-//             appendMessage("BOT", data.response);
-//             currentConversation.push({ sender: 'BOT', text: data.response });
-//         } else {
-//             appendMessage("BOT", "⚠️ Unexpected response format.");
-//         }
-//     })
-//     .catch(error => {
-//         console.error("Error fetching Data & Response:", error);
-//         appendMessage("BOT", "❌ Error fetching response. Please try again.");
-//     });
-// }
-
 function fetchBotResponse(message) {
     fetch("https://striped-selia-ankituikey-f30b92bb.koyeb.app/chat", { 
         method: "POST",
@@ -102,12 +75,12 @@ function fetchBotResponse(message) {
             appendMessage("BOT", data.response);
             currentConversation.push({ sender: 'BOT', text: data.response });
         } else {
-            appendMessage("BOT", "Unexpected response format.");
+            appendMessage("BOT", "⚠️ Unexpected response format.");
         }
     })
     .catch(error => {
         console.error("Error fetching Data & Response:", error);
-        appendMessage("BOT", "Error fetching response. Please try again.");
+        appendMessage("BOT", "❌ Error fetching response. Please try again.");
     });
 }
 
